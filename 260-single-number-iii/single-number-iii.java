@@ -1,6 +1,6 @@
 class Solution {
     public int[] singleNumber(int[] nums) {
-        HashMap<Integer, Integer> map = new HashMap<>();
+         HashMap<Integer, Integer> map = new HashMap<>();
 
         for (int i : nums) {
             if (!map.containsKey(i)) {
@@ -21,9 +21,7 @@ class Solution {
             }
         }
 
-        //th
-       Collections.sort(li);
-     
+    
 
         int[] newarr=new int[li.size()];
         int k=0;
