@@ -2,35 +2,55 @@ class Solution {
     public List<List<Integer>> threeSum(int[] arr) {
         //we are doing the three sum of the arrays
 
-         Set<List<Integer>> s=new HashSet<>();
+
+        List<List<Integer>> li=new ArrayList<>();
+
+        Arrays.sort(arr);
+
         for(int i=0;i<arr.length-2;i++)
         {
-            HashSet<Integer> s1=new HashSet<>();
-            for(int j=i+1;j<arr.length;j++)
+            if(i>0 && arr[i]==arr[i-1])
             {
-                int k=-(arr[i]+arr[j]);
-             
-                    if(s1.contains(k))
-                    {  
-                    List<Integer> li=new ArrayList<>();
-
-                    li.add(arr[i]);
-                    li.add(arr[j]);
-                    li.add(k);
-                    Collections.sort(li);
-                    s.add(li);
-                    }
-                    s1.add(arr[j]);
-                
+                continue;
             }
-        }
 
-        List<List<Integer>> ans=new ArrayList<>();
+            int j=i+1;
+            int k=arr.length-1;
 
-        for(List<Integer> i:s)
-        {
-            ans.add(i);
+            while(j<k)
+            {
+                if(arr[i]+arr[j]+arr[k]>0)
+                {
+                    k--;
+                }
+                else if(arr[i]+arr[j]+arr[k]<0)
+                {
+                    j++;
+                }
+                else{
+                   ArrayList<Integer> li1=new ArrayList<>();
+                   li1.add(arr[i]);
+                   li1.add(arr[j]);
+                   li1.add(arr[k]);
+                   li.add(li1);
+                   j++;
+                   k--;
+
+                   while(j<k && arr[j-1]==arr[j])
+                   {
+                    j++;
+
+                   }
+                   while(j<k && arr[k]==arr[k+1])
+                   {
+                    k--;
+                   }
+                }
+            }
+
+          
         }
-        return ans;
+          return li;
+ 
     }
 }
