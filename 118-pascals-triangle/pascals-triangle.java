@@ -2,14 +2,14 @@ class Solution {
     public static List<Integer> generaterow(int r){
         List<Integer> li=new ArrayList<>();
 
-        int res=1;
-        li.add(res);
+        long res=1;
+        li.add((int)res);
         for(int i=1;i<r;i++)
 
         {
             res=res*(r-i);
             res=res/i;
-            li.add(res);
+            li.add((int)res);
         }
 
         return li;
