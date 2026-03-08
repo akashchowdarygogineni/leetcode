@@ -3,7 +3,8 @@ class Solution {
        int m = arr.length;
         int n = arr[0].length;
 
-        boolean[][] mark = new boolean[m][n];
+        boolean[] row=new boolean[m];
+        boolean[] column=new boolean[n];
 
         for(int i = 0; i < m; i++)
         {
@@ -11,8 +12,8 @@ class Solution {
             {
                 if(arr[i][j] == 0)
                 {
-                    matR(mark, i);
-                    matC(mark, j);
+                    row[i]=true;
+                    column[j]=true;
                 }
             }
         }
@@ -21,7 +22,7 @@ class Solution {
         {
             for(int j = 0; j < n; j++)
             {
-                if(mark[i][j])
+                if(row[i] || column[j])
                 {
                     arr[i][j] = 0;
                 }
@@ -29,19 +30,7 @@ class Solution {
         }
     }
 
-   public void matR(boolean[][] mark, int i)
-    {
-        for(int j = 0; j < mark[i].length; j++)
-        {
-            mark[i][j] = true;
-        }
-    }
-
-    public void matC(boolean[][] mark, int j)
-    {
-        for(int i = 0; i < mark.length; i++)
-        {
-            mark[i][j] = true;
-        }
-    }
+  
+  
+    
 }
