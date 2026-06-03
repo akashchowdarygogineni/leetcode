@@ -1,16 +1,18 @@
 class Solution {
-    public int[][] transpose(int[][] mat) {
+    public int[][] transpose(int[][] matrix) {
         
-        int[][] newarr=new int[mat[0].length][mat.length];
+      int m = matrix.length;
+        int n = matrix[0].length;
 
-        for(int i=0;i<mat.length;i++)
-        {
-            for(int j=0;j<mat[0].length;j++)
-            {
-               newarr[j][i]=mat[i][j];
+        int[][] result = new int[n][m];
+
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                result[j][i] = matrix[i][j];
             }
         }
+        return result;
 
-        return newarr;
+
     }
 }
