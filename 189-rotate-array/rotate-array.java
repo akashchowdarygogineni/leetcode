@@ -3,11 +3,10 @@ class Solution {
    
     int n=nums.length;
      k=k%n;
-     
+     //reverse the n-d elemnts which are at the first
+       reverse(nums,0,n-k-1);
       //we want to revrese the k elemnts which are at the last
        reverse(nums,n-k,n-1);
-       //reverse the n-d elemnts which are at the first
-       reverse(nums,0,n-k-1);
        //then reverse the entire n elemnts 
        reverse(nums,0,n-1);
       
