@@ -1,9 +1,9 @@
 class Solution {
     public int subarraysDivByK(int[] arr, int k) {
-         long count=0;
+         int count=0;
         
         
-        long sum=0;
+        int sum=0;
         
         
         HashMap<Integer,Integer> map=new HashMap<>();
@@ -15,7 +15,7 @@ class Solution {
         {
             sum+=arr[i];
             
-            int rem=(int)(sum%k);
+            int rem=sum%k;
             
             if(rem<0)
             {
@@ -37,6 +37,6 @@ class Solution {
             }
         }
         
-        return (int)count;
+        return count;
     }
 }
