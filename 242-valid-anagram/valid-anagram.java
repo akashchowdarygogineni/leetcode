@@ -4,28 +4,37 @@ class Solution {
 
 
         
-       if(s.length()!=t.length())
-       {
-        return false;
-       }
-      
-       //hasharray of first String and second string
-       int[] hasharr=new int[26];
-       int[] hasharr1=new int[26];
-
-       for(int i=0;i<s.length();i++)
-       {
-         hasharr[s.charAt(i)-'a']+=1;
-         hasharr1[t.charAt(i)-'a']+=1;
-       }
-
-       for(int i=0;i<=25;i++)
-       {
-         if(hasharr[i]!=hasharr1[i])
-         {
+           if(s.length()!=t.length())
+        {
             return false;
-         }
-       }
-       return true;
+        }
+
+        HashMap<Character,Integer> map1=new HashMap<>();
+        
+        HashMap<Character,Integer> map2=new HashMap<>();
+        for(int i=0;i<s.length();i++)
+        {
+            char ch=t.charAt(i);
+            if(!map1.containsKey(ch))
+            {
+                map1.put(ch,1);
+            }
+            else{
+                map1.put(ch,map1.get(ch)+1);
+            }
+
+            char ch1=s.charAt(i);
+            if(!map2.containsKey(ch1))
+            {
+                map2.put(ch1,1);
+            }
+            else{
+                map2.put(ch1,map2.get(ch1)+1);
+            }
+        }
+
+
+      
+        return map1.equals(map2);
     }
 }
