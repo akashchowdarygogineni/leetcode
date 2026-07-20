@@ -11,7 +11,7 @@ class Solution {
 
         for(int i=0;i<p.length();i++)
         {
-            char ch=p.charAt(i);
+            char ch = p.charAt(i);
             if(!map.containsKey(ch))
             {
                 map.put(ch,1);
@@ -24,13 +24,13 @@ class Solution {
 
         //fixed window
 
-        int left=0;
-        int right=p.length()-1;
+        int left = 0;
+        int right = p.length()-1;
 
          HashMap<Character,Integer> map1=new HashMap<>();
         for(int i=left;i<=right;i++)
         {
-           char ch1=s.charAt(i);
+           char ch1 = s.charAt(i);
 
            if(!map1.containsKey(ch1))
            {
