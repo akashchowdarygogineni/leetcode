@@ -1,56 +1,52 @@
 class Solution {
-    public List<List<Integer>> threeSum(int[] arr) {
+    public List<List<Integer>> threeSum(int[] nums) {
         //we are doing the three sum of the arrays
 
+        Arrays.sort(nums);
+        List<List<Integer>> li=new ArrayList<List<Integer>>();
 
-        List<List<Integer>> li=new ArrayList<>();
 
-        Arrays.sort(arr);
-
-        for(int i=0;i<arr.length-2;i++)
+        for(int i=0;i<nums.length-1;i++)
         {
-            if(i>0 && arr[i]==arr[i-1])
+            if(i>0 && nums[i]==nums[i-1])
             {
                 continue;
             }
-
             int j=i+1;
-            int k=arr.length-1;
+            int k=nums.length-1;
 
             while(j<k)
             {
-                if(arr[i]+arr[j]+arr[k]>0)
-                {
-                    k--;
-                }
-                else if(arr[i]+arr[j]+arr[k]<0)
+                int sum=nums[i]+nums[j]+nums[k];
+                if(sum<0)
                 {
                     j++;
+                }
+                else if(sum>0)
+                {
+                    k--;
                 }
                 else{
-                   ArrayList<Integer> li1=new ArrayList<>();
-                   li1.add(arr[i]);
-                   li1.add(arr[j]);
-                   li1.add(arr[k]);
-                   li.add(li1);
-                   j++;
-                   k--;
-
-                   while(j<k && arr[j-1]==arr[j])
-                   {
+                    ArrayList li1=new ArrayList<>();
+                    li1.add(nums[i]);
+                    li1.add(nums[j]);
+                    li1.add(nums[k]);
+                    li.add(li1);
                     j++;
-
-                   }
-                   while(j<k && arr[k]==arr[k+1])
-                   {
                     k--;
-                   }
+                    while(j<k && nums[j]==nums[j-1])
+                    {
+                        j++;
+                    }
+                      while(k>j && nums[k]==nums[k+1])
+                    {
+                        k--;
+                    }
                 }
             }
-
-          
         }
-          return li;
+
+        return li;
  
     }
 }
