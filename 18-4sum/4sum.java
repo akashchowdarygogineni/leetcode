@@ -1,42 +1,65 @@
 class Solution {
     public List<List<Integer>> fourSum(int[] nums, int target) {
         
-           List<List<Integer>> li1=new ArrayList<List<Integer>>();
+        Arrays.sort(nums);
+        List<List<Integer>> li=new ArrayList<List<Integer>>();
 
-        HashSet<List<Integer>> set1=new HashSet<>();
 
-        for(int i=0;i<nums.length;i++)
+        for(int i=0;i<nums.length-1;i++)
         {
-            
+            if(i>0 && nums[i]==nums[i-1])
+            {
+                continue;
+            }
             for(int j=i+1;j<nums.length;j++)
             {
-                HashSet<Long> set=new HashSet<>();
-                for(int k=j+1;k<nums.length;k++)
-                {
 
-                long x=(long)target-((long)nums[i]+(long)nums[j]+(long)nums[k]);
+              if(j!=i+1 && nums[j]==nums[j-1])
+              {
+                continue;
+              }
+            int k=j+1;
+            int l=nums.length-1;
 
-                if(set.contains(x))
+            while(k<l)
+            {
+                long sum=nums[i];
+                sum+=nums[j];
+                sum+=nums[k];
+                sum+=nums[l];
+                if(sum<target)
                 {
-                    //triplet
-                    ArrayList<Integer> li=new ArrayList<>();
-                    li.add(nums[i]);
-                    li.add(nums[j]);
-                    li.add(nums[k]);
-                    li.add((int)x);
-                    Collections.sort(li);
-                    set1.add(li);
+                    k++;
                 }
-                set.add((long)nums[k]);
+                else if(sum>target)
+                {
+                    l--;
                 }
+                else{
+                    ArrayList li1=new ArrayList<>();
+                    li1.add(nums[i]);
+                    li1.add(nums[j]);
+                    li1.add(nums[k]);
+                    li1.add(nums[l]);
+                    li.add(li1);
+                    k++;
+                    l--;
+                    while(k<l && nums[k]==nums[k-1])
+                    {
+                        k++;
+                    }
+                      while(l>k && nums[l]==nums[l+1])
+                    {
+                        l--;
+                    }
+                }
+
+
+            }
+
             }
         }
 
-        //then
-        for(List<Integer> it:set1)
-        {
-            li1.add(it);
-        }
-        return li1;
+        return li;
     }
 }
