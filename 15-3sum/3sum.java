@@ -2,51 +2,37 @@ class Solution {
     public List<List<Integer>> threeSum(int[] nums) {
         //we are doing the three sum of the arrays
 
-        Arrays.sort(nums);
-        List<List<Integer>> li=new ArrayList<List<Integer>>();
+      
+        List<List<Integer>> li1=new ArrayList<List<Integer>>();
 
+        HashSet<List<Integer>> set1=new HashSet<>();
 
-        for(int i=0;i<nums.length-1;i++)
+        for(int i=0;i<nums.length;i++)
         {
-            if(i>0 && nums[i]==nums[i-1])
+            HashSet<Integer> set=new HashSet<>();
+            for(int j=i+1;j<nums.length;j++)
             {
-                continue;
-            }
-            int j=i+1;
-            int k=nums.length-1;
+                int target=-(nums[i]+nums[j]);
 
-            while(j<k)
-            {
-                int sum=nums[i]+nums[j]+nums[k];
-                if(sum<0)
+                if(set.contains(target))
                 {
-                    j++;
+                    //triplet
+                    ArrayList<Integer> li=new ArrayList<>();
+                    li.add(nums[i]);
+                    li.add(nums[j]);
+                    li.add(target);
+                    Collections.sort(li);
+                    set1.add(li);
                 }
-                else if(sum>0)
-                {
-                    k--;
-                }
-                else{
-                    ArrayList li1=new ArrayList<>();
-                    li1.add(nums[i]);
-                    li1.add(nums[j]);
-                    li1.add(nums[k]);
-                    li.add(li1);
-                    j++;
-                    k--;
-                    while(j<k && nums[j]==nums[j-1])
-                    {
-                        j++;
-                    }
-                      while(k>j && nums[k]==nums[k+1])
-                    {
-                        k--;
-                    }
-                }
+                set.add(nums[j]);
             }
         }
 
-        return li;
- 
+        //then
+        for(List<Integer> it:set1)
+        {
+            li1.add(it);
+        }
+        return li1;
     }
 }
