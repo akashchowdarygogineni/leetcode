@@ -41,7 +41,7 @@ class Solution {
 
       for(left=l;left<=mid;left++)
       {
-        while(right<=r && arr[left]>2L*(long)arr[right])
+        while(right<=r && arr[left]>2*(long)arr[right])
         {
          
       
