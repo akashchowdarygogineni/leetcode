@@ -1,74 +1,103 @@
 class Solution {
-    static int count=0;
-    public int reversePairs(int[] nums) {
+    static int  count=0;
+    public int reversePairs(int[] arr) {
         count=0;
-       mergesort(0,nums.length-1,nums);
-       return count;
-
-    }
-       public static void reversepairscount(int low,int mid,int high,int[] nums)
-    {
-        int left=low;
-        int right=mid+1;
-
-        while(left<=mid)
-        {
-            while(right<=high && (long)nums[left]>(long)2*nums[right])
-            {
-                right++;
-            }
-            count+=right-(mid+1);
-            left++;
-        }
+        int l=0;
+        int r=arr.length-1;
+        merge(arr,l,r);
+        return count;
     }
 
-     public static void merge(int low,int mid,int high,int[] nums)
+      public static void merge(int[] arr,int l,int r)
     {
-        ArrayList<Integer> li=new ArrayList<>();
-       int left=low;
-       int right=mid+1;
-
-        while(left<=mid && right<=high )
-        {
-            if(nums[left]<=nums[right])
-            {
-                li.add(nums[left]);
-                left++;
-            }
-            else{
-                li.add(nums[right]);
-                right++;
-            }
-        }
-        while(left<=mid)
-        {
-            li.add(nums[left]);
-            left++;
-        }
-         while(right<=high)
-        {
-            li.add(nums[right]);
-            right++;
-        }
-
-        for(int i=0;i<li.size();i++)
-        {
-            nums[low+i]=li.get(i);
-        }
-    }
-
-    public static void mergesort(int low,int high,int[] nums)
-    {
-        if(low>=high)
+        //base condition
+        if(l>=r)
         {
             return;
         }
+        
+        int mid=(l+r)/2;
+        
+        //for the left part
+        merge(arr,l,mid);
+        
+        //for the right part
+        merge(arr,mid+1,r);
+        
 
-        int mid=(low+high)/2;
+        //before that what we are doing counting inversions
+        reversepaircount(arr,l,mid,r);
+        //merge the two arrays
+        mergearrays(arr,l,mid,r);
+    }
+   
 
-        mergesort(low,mid,nums);
-        mergesort(mid+1,high,nums);
-        reversepairscount(low,mid,high,nums);
-        merge(low,mid,high,nums);
+   public static void reversepaircount(int[] arr,int l,int mid,int r)
+   {
+      
+      //now what i am doing i am counting the reverse pairs
+      int left=l;
+      int right=mid+1;
+
+      for(left=l;left<=mid;left++)
+      {
+        while(right<=r && arr[left]>2L*(long)arr[right])
+        {
+         
+      
+          right++;
+      
+          
+        }
+        count+=(right-(mid+1));
+      }
+  }
+
+       
+    public static void mergearrays(int[] arr,int l,int mid,int r)
+    {
+        int left=l;
+        int right=mid+1;
+        
+        //craete the arraylist to store the elemnts temproray
+        ArrayList<Integer> li=new ArrayList<>();
+        
+        //travresing over the left and the right of the two  arrays
+        while(left<=mid && right<=r)
+        {
+            if(arr[left]<=arr[right])
+            {
+                li.add(arr[left]);
+                left++;
+            }
+            else{
+                li.add(arr[right]);
+            
+                right++;
+            }
+        }
+        
+        //if the elemnts remaing on the left half
+        while(left<=mid)
+        {
+            li.add(arr[left]);
+            left++;
+        }
+        
+        //if the elemnts are remainig in teh right half
+        while(right<=r)
+        {
+            li.add(arr[right]);
+            right++;
+        }
+        
+        //push these arraylist elemnts into the original array
+        int j=0;
+        for(int i=l;i<=r;i++)
+        {
+            arr[i]=li.get(j);
+            j++;
+            
+        }
     }
 }
